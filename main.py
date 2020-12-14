@@ -99,7 +99,7 @@ while run:
     clock.tick(fps)
     
     screen.fill(bg)
-    wall.draw_wall
+    wall.draw_wall()
     
     player_board.draw()
     player_board.moving()
