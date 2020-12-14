@@ -2,7 +2,7 @@ import pygame
 from pygame.locals import *
 
 pygame.init()
-# width & height
+#width & height
 screen_width = 600
 screen_height = 600
 
@@ -21,7 +21,6 @@ cols = 6
 rows = 6
 clock = pygame.time.Clock()
 fps = 60
-
 
 class wall():
 
@@ -63,18 +62,16 @@ class wall():
                 pygame.draw.rect(screen, block_col, block[0])
                 pygame.draw.rect(screen, bg, (block[0]), 2)
 
-
 class board():
 
     def __init__(self):
-        self.height = 20
+       self.height = 20
         self.width = int(screen_width / cols)
         self.x = int((screen_width / 2) - (self.width / 2))
         self.y = screen_height - (self.height * 2)
         self.speed = 10
         self.rect = Rect(self.x, self.y, self.width, self.height)
         self.direction = 0
-
 
     def moving(self):
         self.direction = 0
@@ -132,6 +129,8 @@ while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
+
+    pygame.display.update()
 
     pygame.display.update()
 
