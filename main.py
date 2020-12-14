@@ -14,8 +14,13 @@ block_light = (230, 190, 231)
 block_middle= (206, 100, 210)
 block_bottom= (146, 32, 149)
 
+board_col = (165, 165, 162)
+board_outline = (123, 123, 121)
+
 cols = 6
 rows = 6
+clock = pygame.time.Clock()
+fps = 60
 
 class wall():
 
@@ -51,26 +56,59 @@ class wall():
                 if block[1] == 3:
                     block_col = block_bottom
                 elif block[1] == 2:
-                    block_col = block_ocean
+                    block_col = block_middle
                 elif block[1] == 1:
-                    block_col = block_aqua
+                    block_col = block_light
                 pygame.draw.rect(screen, block_col, block[0])
-                
+                pygame.draw.rect(screen, bg, (block[0]), 2)
+               
+class board():
+
+    def __init__(self):
+       self.height = 20
+        self.width = int(screen_width / cols)
+        self.x = int((screen_width / 2) - (self.width / 2))
+        self.y = screen_height - (self.height * 2)
+        self.speed = 10
+        self.rect = Rect(self.x, self.y, self.width, self.height)
+        self.direction = 0
+    
+    def moving(self):
+        self.direction = 0
+        key = pygame.key.get_pressed()
+        if key[pygame.K_LEFT] and self.rect.left > 0:
+            self.rect.x -= self.speed
+            self.direction = -1
+        if key[pygame.K_RIGHT] and self.rect.right < screen_width:
+            self.rect.x += self.speed
+            self.direction = 1
+    
+    def draw(self):
+        pygame.draw.rect(screen, board_col, self.rect)  
+        pygame.draw.rect(screen, board_outline, self.rect, 2)
+        
 wall = wall()
 wall.create_wall()
-      
+ 
+player_board = board()
 
 #running
 run = True
 while run:
     
+    clock.tick(fps)
+    
     screen.fill(bg)
     wall.draw_wall
+    
+    player_board.draw()
+    player_board.moving()
+   
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
             
-    pygame.display.update(
+    pygame.display.update()
 
 pygame.quit()
 
