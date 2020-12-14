@@ -65,7 +65,7 @@ class wall():
 class board():
 
     def __init__(self):
-       self.height = 20
+        self.height = 20
         self.width = int(screen_width / cols)
         self.x = int((screen_width / 2) - (self.width / 2))
         self.y = screen_height - (self.height * 2)
@@ -98,6 +98,22 @@ class game_ball():
         self.rect = Rect(self.x,self.y, self.ball_rad * 2, self.ball_rad * 2)
         self.speed_x = 4
         self.speed_y = -4
+        self.game_over = 0
+
+    def moving(self):
+        if self.rect.left < 0 or self.rect.right > screen_width:
+            self.speed_x *= -1
+
+        if self.rect.top < 0:
+            self.speed_y *= -1
+
+        if self.rect.bottom > screen_height:
+            self.game_over = -1
+
+        self.rect.x += self.speed_x
+        self.rect.y += self.speed_y
+
+        return self.game_over
 
     def draw(self):
         pygame.draw.circle(screen, board_col, (self.rect.x + self.ball_rad, self.rect.y + self.ball_rad), self.ball_rad)
@@ -125,6 +141,7 @@ while run:
     player_board.moving()
 
     ball.draw()
+    ball.moving()
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
