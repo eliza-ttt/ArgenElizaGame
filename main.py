@@ -19,14 +19,14 @@ block_bottom = (146, 32, 149)
 board_col = (250, 250, 250)
 board_outline = (200, 200, 200)
 
-text = (255, 255, 255)
+text_col = (255, 255, 255)
 
 cols = 6
 rows = 6
 clock = pygame.time.Clock()
 fps = 60
 
-ball = False
+live_ball = False
 game_over = 0
 
 def draw_text(text, font, text_col, x, y):
