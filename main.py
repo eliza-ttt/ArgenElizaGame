@@ -10,7 +10,7 @@ screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption('Game')
 
 font = pygame.font.SysFont('Arial', 30)
-
+#colors
 bg = (69, 69, 81)
 block_light = (230, 190, 231)
 block_middle = (206, 100, 210)
