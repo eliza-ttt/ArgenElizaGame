@@ -9,6 +9,8 @@ screen_height = 600
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption('Game')
 
+font = pygame.font.SysFont('Arial', 30)
+
 bg = (69, 69, 81)
 block_light = (230, 190, 231)
 block_middle = (206, 100, 210)
@@ -17,10 +19,19 @@ block_bottom = (146, 32, 149)
 board_col = (250, 250, 250)
 board_outline = (200, 200, 200)
 
+text = (255, 255, 255)
+
 cols = 6
 rows = 6
 clock = pygame.time.Clock()
 fps = 60
+
+ball = False
+game_over = 0
+
+def draw_text(text, font, text_col, x, y):
+    img = font.render(text, True, text_col)
+    screen.blit(img, (x, y))
 
 class wall():
 
